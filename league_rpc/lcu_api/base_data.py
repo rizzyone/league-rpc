@@ -171,6 +171,8 @@ async def gather_summoner_data(connection: Connection, data: ClientData) -> None
     summoner_data = await summoner_data_raw.json()
 
     data.summoner_icon = summoner_data[Summoner.PROFILE_ICON_ID]
+    data.summoner_name = summoner_data[Summoner.GAME_NAME]
+    data.summoner_tagline = summoner_data[Summoner.TAG_LINE]
 
 
 async def gather_telemetry_data(connection: Connection, data: ClientData) -> None:

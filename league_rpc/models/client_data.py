@@ -40,6 +40,8 @@ class ClientData:
     queue_detailed_description: str = ""
     queue_description: str = ""
     queue_id: int = -1
+    summoner_name: str = ""
+    summoner_tagline: str = ""
     summoner_icon: int = 0
     summoner_rank: RankedStats = field(default_factory=RankedStats)
     summoner_rank_flex: RankedStats = field(default_factory=RankedStats)

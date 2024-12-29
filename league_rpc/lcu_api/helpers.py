@@ -23,6 +23,7 @@ from league_rpc.models.rpc_data import RPCData
 from league_rpc.utils.const import (
     CHAMPION_NAME_CONVERT_MAP,
     LEAGUE_OF_LEGENDS_LOGO,
+    PROFILE_ICON_BASE_URL,
     SMALL_TEXT,
 )
 
@@ -190,8 +191,10 @@ def handle_ultimate_spellbook_game(
             else CHAMPION_NAME_CONVERT_MAP.get(champ_name, champ_name)
         )
     )
-    small_image = LEAGUE_OF_LEGENDS_LOGO
-    small_text = SMALL_TEXT
+    small_image = PROFILE_ICON_BASE_URL.format_map(
+        {"icon_id": module_data.client_data.summoner_icon}
+    )
+    small_text = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
 
     module_data.rpc_data = RPCData(
         large_image=skin_asset,
@@ -242,8 +245,10 @@ def handle_swarm_game(silent: bool, module_data: ModuleData) -> None:
         large_text=large_text,
         details=module_data.client_data.get_queue_name,
         state=f"In Game {f'· {get_creepscore()} · lvl: {level} · gold: {gold}' if not module_data.cli_args.no_stats else ''}",
-        small_image=LEAGUE_OF_LEGENDS_LOGO,
-        small_text=SMALL_TEXT,
+        small_image=PROFILE_ICON_BASE_URL.format_map(
+            {"icon_id": module_data.client_data.summoner_icon}
+        ),
+        small_text=module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline,
         start=int(time.time())
         - get_current_ingame_time(default_time=module_data.start_time),
     )
@@ -283,8 +288,10 @@ def handle_arena_game(silent: bool, module_data: ModuleData) -> None:
             else CHAMPION_NAME_CONVERT_MAP.get(champ_name, champ_name)
         )
     )
-    small_image = LEAGUE_OF_LEGENDS_LOGO
-    small_text = SMALL_TEXT
+    small_image = PROFILE_ICON_BASE_URL.format_map(
+        {"icon_id": module_data.client_data.summoner_icon}
+    )
+    small_text = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
 
     if not module_data.cli_args.no_rank:  # type: ignore
         _, _small_image, _small_text = show_ranked_data(module_data)
@@ -340,8 +347,10 @@ def handle_normal_game(
             else CHAMPION_NAME_CONVERT_MAP.get(champ_name, champ_name)
         )
     )
-    small_image = LEAGUE_OF_LEGENDS_LOGO
-    small_text = SMALL_TEXT
+    small_image = PROFILE_ICON_BASE_URL.format_map(
+        {"icon_id": module_data.client_data.summoner_icon}
+    )
+    small_text = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
     if not module_data.cli_args.no_rank:  # type: ignore
         _, _small_image, _small_text = show_ranked_data(module_data)
         if all([_small_image, _small_text]):
@@ -378,8 +387,10 @@ def handle_tft_game(
         large_text=module_data.client_data.tft_companion_name,
         details=module_data.client_data.get_queue_name,
         state=f"In Game · lvl: {get_level()}",
-        small_image=LEAGUE_OF_LEGENDS_LOGO,
-        small_text=SMALL_TEXT,
+        small_image=PROFILE_ICON_BASE_URL.format_map(
+            {"icon_id": module_data.client_data.summoner_icon}
+        ),
+        small_text=module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline,
         start=int(time.time())
         - get_current_ingame_time(default_time=module_data.start_time),
     )
