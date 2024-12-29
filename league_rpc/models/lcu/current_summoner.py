@@ -22,6 +22,8 @@ class Summoner:
     ACCOUNT_ID = "accountId"
     DISPLAY_NAME = "displayName"
     INTERNAL_NAME = "internalName"
+    GAME_NAME = "gameName"
+    TAG_LINE = "tagLine"
     NAME_CHANGE_FLAG = "nameChangeFlag"
     PERCENT_COMPLETE_FOR_NEXT_LEVEL = "percentCompleteForNextLevel"
     PRIVACY = "privacy"

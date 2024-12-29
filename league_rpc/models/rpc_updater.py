@@ -156,12 +156,12 @@ class RPCUpdater:
             details = status_emojis + "  " + details
 
         module_data.rpc_data = RPCData(
-            large_image=PROFILE_ICON_BASE_URL.format_map(
+            large_image=LEAGUE_OF_LEGENDS_LOGO,
+            large_text="In Client",
+            small_image=PROFILE_ICON_BASE_URL.format_map(
                 {"icon_id": module_data.client_data.summoner_icon}
             ),
-            large_text="In Client",
-            small_image=LEAGUE_OF_LEGENDS_LOGO,
-            small_text=SMALL_TEXT,
+            small_text=module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline,
             details=details,
             state="In Client",
             start=module_data.client_data.application_start_time,
@@ -174,15 +174,15 @@ class RPCUpdater:
         module_data: ModuleData,
     ) -> None:
         """Updates Rich Presence for lobby status, handling custom and standard lobbies."""
-        large_image = PROFILE_ICON_BASE_URL.format_map(
-            {"icon_id": module_data.client_data.summoner_icon}
-        )
-
-        large_text = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
-        small_image: str = BASE_MAP_ICON_URL.format(
+        large_image: str = BASE_MAP_ICON_URL.format(
             map_name=MAP_ICON_CONVERT_MAP.get(module_data.client_data.map_id)
         )
-        small_text = SMALL_TEXT
+
+        large_text: str = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
+        small_image: str = PROFILE_ICON_BASE_URL.format_map(
+            {"icon_id": module_data.client_data.summoner_icon}
+        )
+        small_text: str = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
 
         details = f"{module_data.client_data.get_queue_name}"
         state = f"In Lobby ({module_data.client_data.players}/{module_data.client_data.max_players})"
@@ -215,15 +215,15 @@ class RPCUpdater:
         module_data: ModuleData,
     ) -> None:
         """Updates Rich Presence for lobby status, handling custom and standard lobbies."""
-        large_image = PROFILE_ICON_BASE_URL.format_map(
-            {"icon_id": module_data.client_data.summoner_icon}
-        )
-
-        large_text = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
-        small_image: str = BASE_MAP_ICON_URL.format(
+        large_image: str = BASE_MAP_ICON_URL.format(
             map_name=MAP_ICON_CONVERT_MAP.get(module_data.client_data.map_id)
         )
-        small_text = SMALL_TEXT
+
+        large_text: str = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
+        small_image: str = PROFILE_ICON_BASE_URL.format_map(
+            {"icon_id": module_data.client_data.summoner_icon}
+        )
+        small_text: str = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
 
         details: str = f"In Lobby: {module_data.client_data.queue_name}"
         state = "Custom Lobby"
@@ -241,14 +241,15 @@ class RPCUpdater:
 
     def in_queue_rpc(self, module_data: ModuleData) -> None:
         """Updates Rich Presence during the queue phase."""
-        large_image: str = PROFILE_ICON_BASE_URL.format_map(
-            {"icon_id": module_data.client_data.summoner_icon}
-        )
-        large_text: str = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
-        small_image: str = BASE_MAP_ICON_URL.format(
+        large_image: str = BASE_MAP_ICON_URL.format(
             map_name=MAP_ICON_CONVERT_MAP.get(module_data.client_data.map_id)
         )
-        small_text = SMALL_TEXT
+
+        large_text: str = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
+        small_image: str = PROFILE_ICON_BASE_URL.format_map(
+            {"icon_id": module_data.client_data.summoner_icon}
+        )
+        small_text: str = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
 
         if not module_data.cli_args.no_rank:  # type: ignore
             _large_text, _small_image, _small_text = show_ranked_data(module_data)
@@ -272,14 +273,15 @@ class RPCUpdater:
 
     def in_champ_select_rpc(self, module_data: ModuleData) -> None:
         """Updates Rich Presence during champion selection."""
-        large_image: str = PROFILE_ICON_BASE_URL.format_map(
-            {"icon_id": module_data.client_data.summoner_icon}
-        )
-        large_text: str = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
-        small_image: str = BASE_MAP_ICON_URL.format(
+        large_image: str = BASE_MAP_ICON_URL.format(
             map_name=MAP_ICON_CONVERT_MAP.get(module_data.client_data.map_id)
         )
-        small_text = SMALL_TEXT
+
+        large_text: str = f"{GAME_MODE_CONVERT_MAP.get(module_data.client_data.gamemode, module_data.client_data.gamemode)}"
+        small_image: str = PROFILE_ICON_BASE_URL.format_map(
+            {"icon_id": module_data.client_data.summoner_icon}
+        )
+        small_text: str = module_data.client_data.summoner_name + "#" + module_data.client_data.summoner_tagline
 
         if not module_data.cli_args.no_rank:  # type: ignore
             _large_text, _small_image, _small_text = show_ranked_data(module_data)
